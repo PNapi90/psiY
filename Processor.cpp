@@ -2,8 +2,10 @@
 
 //---------------------------------------------------------
 
-Processor::Processor(std::vector<int> &d0_Range,int EnergyBin,
-                     FileHandler *FILES) : MERGER()
+Processor::Processor(std::vector<int> &d0_Range,
+                     int EnergyBin,
+                     FileHandler *FILES) 
+ : MERGER()
 {
     d0_start = d0_Range[0];
     d0_end = d0_Range[1];
