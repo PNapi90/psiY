@@ -4,8 +4,10 @@
 
 Processor::Processor(std::vector<int> &d0_Range,
                      int EnergyBin,
-                     FileHandler *FILES) 
- : MERGER()
+                     FileHandler *FILES,
+                     int _thrNum) 
+    : MERGER(),
+      thrNum(_thrNum)
 {
     d0_start = d0_Range[0];
     d0_end = d0_Range[1];
@@ -52,7 +54,10 @@ void Processor::PROCESS(std::vector<std::vector<double>> &HistE)
             //write merged Histogram into file E_i/d0_j/d12_k
             FILES->Write(Merge,Name);
         }
-        
+        if(thrNum == 0)
+        {   
+            std::cout << "Thread # 00 : Distance d0 = " << d0 << " mm done" << std::endl;
+        }
     }
 }
 

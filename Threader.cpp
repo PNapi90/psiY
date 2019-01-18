@@ -7,7 +7,7 @@ Threader::Threader(int _thrNum, FileHandler *FILES,
                    int EnergyBin,
                    std::vector<std::vector<double>> &_HistE)
     : thrNum(_thrNum),
-      Process(d0_Range, EnergyBin, FILES)
+      Process(d0_Range, EnergyBin, FILES,_thrNum)
 {
 
     std::string threadString = (thrNum > 9) ? std::to_string(thrNum) : "0"+std::to_string(thrNum);

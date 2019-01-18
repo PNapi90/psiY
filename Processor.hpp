@@ -14,7 +14,7 @@ class Processor
 {
 private:
     
-    int d0_start,d0_end,EnergyBin;
+    int d0_start,d0_end,EnergyBin,thrNum;
 
     std::vector<int> d12s;
     std::vector<double> Maxima;
@@ -26,7 +26,8 @@ private:
 public:
     Processor(std::vector<int> &d0_Range,
               int EnergyBin,
-              FileHandler *FILES);
+              FileHandler *FILES,
+              int _thrNum);
     ~Processor();
 
     void PROCESS(std::vector<std::vector<double>> &HistE);

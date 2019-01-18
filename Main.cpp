@@ -72,7 +72,7 @@ int main(int argc,char** argv)
         Threads.push_back(std::make_shared<Threader>(i, &FILES, d0_Range[i], Egamma,HistE));
     }
 
-    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "-----------------------------------------" << std::endl;
 
     std::thread t[nthr];
     for(int i = 0;i < nthr;++i) t[i] = Threads[i]->threading();
