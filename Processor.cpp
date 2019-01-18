@@ -18,7 +18,7 @@ Processor::Processor(std::vector<int> &d0_Range,
     HistX = std::vector<std::vector<double>>(150,std::vector<double>(101,0));
     d12s = std::vector<int>(150,0);
 
-    Merge = std::vector<std::vector<double>>(175,std::vector<double>(180,0));
+    Merge = std::vector<std::vector<double>>(175,std::vector<double>(181,0));
     Maxima = std::vector<double>(175,0);
 
     for(int i = 0;i < 150;++i) d12s[i] = i*4;

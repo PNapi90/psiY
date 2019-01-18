@@ -19,12 +19,6 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
 
     std::lock_guard<std::mutex> LOCK(MUTEX);
 
-
-    locked = true;
-
-    if (!locked)
-        UnlockException();
-
     std::string d012Name = "d0_Hists/d0s_5_4/d0_" + std::to_string(d0) + "/d12_" + std::to_string(d12);
 
     std::ifstream DATA;
@@ -61,12 +55,6 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
                 DATA >> DataX[i][j];
         }
     }
-    
-
-    if (!locked)
-        UnlockException();
-
-    locked = false;
 }
 
 //---------------------------------------------------------
@@ -74,11 +62,6 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
 void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
 {
     std::lock_guard<std::mutex> LOCK(MUTEX);
-
-    locked = true;
-
-    if (!locked)
-        UnlockException();
 
     std::string EName = "ComptonHists/ComptonHist_" + std::to_string(Eg);
     
@@ -115,22 +98,13 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
                 DATA >> DataE[i][j];
         }
     }
-
-    if (!locked)
-        UnlockException();
-
-    locked = false;
 }
 
 //---------------------------------------------------------
 
 void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string FileName)
 {
-    std::lock_guard<std::mutex> LOCK(MUTEX);
-
-    locked = true;
-
-    if (!locked) UnlockException();
+    std::lock_guard<std::mutex> LOCK(MUTEX_W);
 
     std::ofstream DATA;
     if (binary)
@@ -163,16 +137,7 @@ void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string Fil
         }
     }
     
-
-    if (!locked)
-        UnlockException();
-
     DATA.close();
-
-    if (!locked)
-        UnlockException();
-
-    locked = false;
 }
 
 //---------------------------------------------------------

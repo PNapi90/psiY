@@ -16,7 +16,7 @@ private:
 
     void UnlockException();
 
-    std::mutex MUTEX;
+    std::mutex MUTEX,MUTEX_W;
 
 public:
     FileHandler(bool _binary);
