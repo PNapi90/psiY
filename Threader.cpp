@@ -9,7 +9,10 @@ Threader::Threader(int _thrNum, FileHandler *FILES,
     : thrNum(_thrNum),
       Process(d0_Range, EnergyBin, FILES)
 {
-    std::cout << "Created Thread # " << thrNum;
+
+    std::string threadString = (thrNum > 9) ? std::to_string(thrNum) : "0"+std::to_string(thrNum);
+
+    std::cout << "Created Thread # " << threadString;
     std::cout << " with d0 in [" << d0_Range[0] << "," << d0_Range[1] << ")";
     std::cout << std::endl;
 

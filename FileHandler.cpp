@@ -2,7 +2,8 @@
 
 //---------------------------------------------------------
 
-FileHandler::FileHandler()
+FileHandler::FileHandler(bool _binary)
+    : binary(_binary)
 {}
 
 //---------------------------------------------------------
@@ -26,7 +27,11 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
 
     std::string d012Name = "d0_" + std::to_string(d0) + "/d12_" + std::to_string(d12);
 
-    std::ifstream DATA(d012Name, std::ios::in | std::ios::binary);
+    std::ifstream DATA;
+    if(binary)
+        DATA.open(d012Name, std::ios::in | std::ios::binary);
+    else
+        DATA.open(d012Name);
 
     if (DATA.fail())
     {
@@ -36,14 +41,27 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
 
     std::vector<double> TVec(DataX[0].size(), 0);
 
-    for (int i = 0; i < DataX.size(); ++i)
+    if(binary)
     {
-        DATA.read(reinterpret_cast<char *>(&TVec[0]),
-                  TVec.size() * sizeof(TVec[0]));
+        for (int i = 0; i < DataX.size(); ++i)
+        {
+            DATA.read(reinterpret_cast<char *>(&TVec[0]),
+                      TVec.size() * sizeof(TVec[0]));
 
-        for (int j = 0; j < TVec.size(); ++j)
-            DataX[i][j] = TVec[j];
+            for (int j = 0; j < TVec.size(); ++j)
+                DataX[i][j] = TVec[j];
+        }
     }
+    
+    else
+    {
+        for (int i = 0; i < DataX.size(); ++i)
+        {
+            for (int j = 0; j < DataX[0].size(); ++j)
+                DATA >> DataX[i][j];
+        }
+    }
+    
 
     if (!locked)
         UnlockException();
@@ -62,8 +80,13 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
     if (!locked)
         UnlockException();
 
-    std::string EName = "ComptonHist_" + std::to_string(Eg);
-    std::ifstream DATA(EName,std::ios::in | std::ios::binary);
+    std::string EName = "ComptonHists/ComptonHist_" + std::to_string(Eg);
+    
+    std::ifstream DATA;
+    if (binary)
+        DATA.open(EName, std::ios::in | std::ios::binary);
+    else
+        DATA.open(EName);
 
     if(DATA.fail())
     {
@@ -73,13 +96,24 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
 
     std::vector<double> TVec(DataE[0].size(),0);
 
-    for (int i = 0; i < DataE.size(); ++i)
+    if(binary)
     {
-        DATA.read(reinterpret_cast<char *>(&TVec[0]),
-                 TVec.size() * sizeof(TVec[0]));
+        for (int i = 0; i < DataE.size(); ++i)
+        {
+            DATA.read(reinterpret_cast<char *>(&TVec[0]),
+                      TVec.size() * sizeof(TVec[0]));
 
-        for (int j = 0; j < TVec.size(); ++j)
-            DataE[i][j] = TVec[j];
+            for (int j = 0; j < TVec.size(); ++j)
+                DataE[i][j] = TVec[j];
+        }
+    }
+    else
+    {
+        for (int i = 0; i < DataE.size(); ++i)
+        {
+            for (int j = 0; j < DataE[0].size(); ++j)
+                DATA >> DataE[i][j];
+        }
     }
 
     if (!locked)
@@ -98,19 +132,37 @@ void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string Fil
 
     if (!locked) UnlockException();
 
-    std::ofstream DATA(FileName,std::ios::out | std::ios::binary);
-    
+    std::ofstream DATA;
+    if (binary)
+        DATA.open(FileName, std::ios::out | std::ios::binary);
+    else
+        DATA.open(FileName);
+
     if(DATA.fail())
     {
         std::cerr << "Could not open Output file " << FileName << std::endl;
         exit(1);
     }
 
-    for (auto V : DataEX)
+    if(binary)
     {
-        DATA.write(reinterpret_cast<char *>(&V[0]),
-                   V.size() * sizeof(V[0]));
+        for (auto V : DataEX)
+        {
+            DATA.write(reinterpret_cast<char *>(&V[0]),
+                       V.size() * sizeof(V[0]));
+        }
     }
+    
+    else
+    {
+        for(auto DVec : DataEX)
+        {
+            for(auto V : DVec)
+                DATA << V << " ";
+            DATA << std::endl;
+        }
+    }
+    
 
     if (!locked)
         UnlockException();

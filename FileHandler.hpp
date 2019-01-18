@@ -12,14 +12,14 @@ class FileHandler
 {
 private:
 
-    bool locked;
+    bool locked,binary;
 
     void UnlockException();
 
     std::mutex MUTEX;
 
 public:
-    FileHandler();
+    FileHandler(bool _binary);
     ~FileHandler();
 
     void Load_d12(std::vector<std::vector<double>> &DataX, int d0, int d12);
