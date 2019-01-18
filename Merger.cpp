@@ -38,8 +38,12 @@ void Merger::MERGE(std::vector<std::vector<double>> &HistE,
             Merge[i][j] = 0;
             for (int k = 0; k < HistE_psi_Size; ++k)
             {
-                Val = Min(HistE[i][k], HistX[j][k]);
-                Merge[i][j] += Val;
+                //prevent overfilled bins
+                if(HistX[j][k] < 1)
+                {
+                    Val = Min(HistE[i][k], HistX[j][k]);
+                    Merge[i][j] += Val;
+                }
             }
             Max = (Max <= Merge[i][j]) ? Merge[i][j] : Max;
         }
