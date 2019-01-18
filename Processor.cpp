@@ -39,7 +39,9 @@ void Processor::PROCESS(std::vector<std::vector<double>> &HistE)
     std::string Name;
     for(int i = d0_start;i < d0_end;++i)
     {
-        d0 += 4;
+        d0 = i;
+        if(i % 4 != 0)
+            continue;
         for(auto d12 : d12s)
         {
             //load d0_d12 histograms from file into HistX
