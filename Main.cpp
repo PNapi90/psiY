@@ -59,6 +59,11 @@ int main(int argc,char** argv)
         d0_Range[i][1] = (i+1)*Divisor;
     }
 
+    std::vector<int> Binning(3,0);
+    Binning[0] = 175;
+    Binning[1] = 180;
+    Binning[2] = 100;
+
     std::vector<std::vector<double>> HistE(175,std::vector<double>(101,0));
 
     FileHandler FILES(F.binary);
@@ -69,7 +74,7 @@ int main(int argc,char** argv)
 
     for(int i = 0;i < nthr;++i)
     {
-        Threads.push_back(std::make_shared<Threader>(i, &FILES, d0_Range[i], Egamma,HistE));
+        Threads.push_back(std::make_shared<Threader>(i, &FILES, d0_Range[i],Binning, Egamma,HistE));
     }
 
     std::cout << "-----------------------------------------" << std::endl;

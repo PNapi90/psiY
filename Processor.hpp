@@ -25,6 +25,7 @@ private:
 
 public:
     Processor(std::vector<int> &d0_Range,
+              std::vector<int> &Binning,
               int EnergyBin,
               FileHandler *FILES,
               int _thrNum);

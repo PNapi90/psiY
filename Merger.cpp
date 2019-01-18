@@ -24,10 +24,12 @@ void Merger::MERGE(std::vector<std::vector<double>> &HistE,
     int HistE_psi_Size = HistE[0].size();
     int HistX_psi_Size = HistX[0].size();
 
-    if(HistE_psi_Size != HistX_psi_Size)
+    HistE_psi_Size = (HistE_psi_Size >= HistX_psi_Size) ? HistX_psi_Size : HistE_psi_Size;
+
+    if (HistE_psi_Size != HistX_psi_Size)
     {
         std::cerr << "HistX size = " << HistX_psi_Size << " not equal to HistE size = " << HistE_psi_Size << std::endl;
-        exit(1);
+        //exit(1);
     }
    
     for(int i = 0;i < HistE_Size;++i)

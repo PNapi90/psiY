@@ -3,9 +3,10 @@
 //---------------------------------------------------------
 
 Processor::Processor(std::vector<int> &d0_Range,
+                     std::vector<int> &Binning,
                      int EnergyBin,
                      FileHandler *FILES,
-                     int _thrNum) 
+                     int _thrNum)
     : MERGER(),
       thrNum(_thrNum)
 {
@@ -15,10 +16,10 @@ Processor::Processor(std::vector<int> &d0_Range,
     this->EnergyBin = EnergyBin;
     this->FILES = FILES;
 
-    HistX = std::vector<std::vector<double>>(150,std::vector<double>(101,0));
+    HistX = std::vector<std::vector<double>>(Binning[1], std::vector<double>(Binning[2], 0));
     d12s = std::vector<int>(150,0);
 
-    Merge = std::vector<std::vector<double>>(175,std::vector<double>(181,0));
+    Merge = std::vector<std::vector<double>>(Binning[0], std::vector<double>(Binning[1], 0));
     Maxima = std::vector<double>(175,0);
 
     for(int i = 0;i < 150;++i) d12s[i] = i*4;

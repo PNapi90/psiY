@@ -23,6 +23,7 @@ public:
     Threader(int _thrNum,
              FileHandler *FILES,
              std::vector<int> &d0_Range,
+             std::vector<int> &_Binning,
              int EnergyBin,
              std::vector<std::vector<double>> &_HistE);
     ~Threader();
