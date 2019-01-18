@@ -78,6 +78,12 @@ int main(int argc,char** argv)
     for(int i = 0;i < nthr;++i) t[i] = Threads[i]->threading();
     for (int i = 0; i < nthr; ++i) t[i].join();
 
+    std::cout << "-----------------------------------------\n" << std::endl;
+
+    std::cout << "*****************************" << std::endl;
+    std::cout << "E\u03B3 = " << F.Egamma << " keV fully processed" << std::endl;
+    std::cout << "*****************************\n" << std::endl;
+    
     return 0;
 }
 
