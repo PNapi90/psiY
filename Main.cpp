@@ -61,8 +61,8 @@ int main(int argc,char** argv)
 
     std::vector<int> Binning(3,0);
     Binning[0] = 175;
-    Binning[1] = 180;
-    Binning[2] = 100;
+    Binning[1] = 181;
+    Binning[2] = 101;
 
     std::vector<std::vector<double>> HistE(175,std::vector<double>(101,0));
 

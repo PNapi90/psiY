@@ -3,7 +3,7 @@ import pylab as py
 
 py.close("all")
 
-data0 = np.loadtxt("Histograms/EGamma_661/d0_120/d12_40")
+data0 = np.loadtxt("Histograms/EGamma_661/d0_0/d12_0")
 
 from matplotlib.colors import LogNorm
 

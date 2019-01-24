@@ -118,6 +118,8 @@ void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string Fil
         exit(1);
     }
 
+    int s = 0;
+
     if(binary)
     {
         for (auto V : DataEX)
@@ -127,10 +129,12 @@ void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string Fil
         }
     }
     
+    
     else
     {
         for(auto DVec : DataEX)
         {
+            s = DVec.size();
             for(auto V : DVec)
                 DATA << V << " ";
             DATA << std::endl;
