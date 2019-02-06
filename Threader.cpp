@@ -18,7 +18,7 @@ Threader::Threader(int _thrNum,
     std::cout << " with d0 in [" << d0_Range[0] << "," << d0_Range[1] << ")";
     std::cout << std::endl;
 
-    HistE = std::vector<std::vector<double>>(175, std::vector<double>(_HistE[0].size(), 0));
+    HistE = std::vector<std::vector<double>>(_HistE.size(), std::vector<double>(_HistE[0].size(), 0));
     for(int i = 0;i < HistE.size();++i)
     {
         for(int j = 0;j < HistE[0].size();++j) HistE[i][j] = _HistE[i][j];

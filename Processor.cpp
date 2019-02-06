@@ -22,7 +22,8 @@ Processor::Processor(std::vector<int> &d0_Range,
     Merge = std::vector<std::vector<double>>(Binning[0], std::vector<double>(Binning[1], 0));
     Maxima = std::vector<double>(Binning[0],0);
 
-    for(int i = 0;i < 150;++i) d12s[i] = i*4;
+    for(int i = 0;i < 150;++i) 
+        d12s[i] = i*4;
 }
 
 //---------------------------------------------------------

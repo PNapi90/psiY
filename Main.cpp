@@ -47,9 +47,15 @@ int main(int argc,char** argv)
     int nthr = F.nthr;
     int Egamma = F.Egamma;
 
+    std::vector<int> Binning(3, 0);
+    
+    //Edep bins
+    Binning[0] = (F.Egamma == 661) ? 175 : F.Egamma / 4 + 1; 
+    
+    Binning[1] = 181; //theta bins
+    Binning[2] = 101; //cos(psi) bins
 
-
-    std::vector<std::vector<int>> d0_Range(175,std::vector<int>(2,0));
+    std::vector<std::vector<int>> d0_Range(nthr,std::vector<int>(2,0));
 
     int Divisor = 600/nthr;
     
@@ -59,12 +65,9 @@ int main(int argc,char** argv)
         d0_Range[i][1] = (i+1)*Divisor;
     }
 
-    std::vector<int> Binning(3,0);
-    Binning[0] = 175;
-    Binning[1] = 181;
-    Binning[2] = 101;
+   
 
-    std::vector<std::vector<double>> HistE(175,std::vector<double>(101,0));
+    std::vector<std::vector<double>> HistE(Binning[0],std::vector<double>(Binning[2],0));
 
     FileHandler FILES(F.binary);
     FILES.Load_E(HistE,Egamma);
