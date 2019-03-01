@@ -52,7 +52,11 @@ void FileHandler::Load_d12(std::vector<std::vector<double>> &DataX,
         for (int i = 0; i < DataX.size(); ++i)
         {
             for (int j = 0; j < DataX[0].size(); ++j)
+            {
                 DATA >> DataX[i][j];
+                if(DataX[i][j] != DataX[i][j])
+                    DataX[i][j] = 0;
+            }
         }
     }
 }
@@ -63,8 +67,8 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
 {
     std::lock_guard<std::mutex> LOCK(MUTEX);
 
-    std::string EName = "ComptonHists/ComptonHist_" + std::to_string(Eg);
-    
+    std::string EName = "ComptonHists/ComptonHist_661_Merge"; //"ComptonHists/ComptonHist_" + std::to_string(Eg);
+
     std::ifstream DATA;
     if (binary)
         DATA.open(EName, std::ios::in | std::ios::binary);
