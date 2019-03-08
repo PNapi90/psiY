@@ -43,7 +43,7 @@ void Merger::MERGE(std::vector<std::vector<double>> &HistE,
                 //prevent overfilled bins
                 if(HistX[j][k] < 1 || true)
                 {
-                    Val = HistE[i][k]*HistX[j][k];
+                    Val = HistE[i][k]*HistX[j][k]/50.;
                     //Val = Min(HistE[i][k], HistX[j][k]);
                     Merge[i][j] += Val;
                 }
@@ -51,7 +51,7 @@ void Merger::MERGE(std::vector<std::vector<double>> &HistE,
             Max = (Max <= Merge[i][j]) ? Merge[i][j] : Max;
         }
         Maxima[i] = Max;
-        if (Max > 0)
+        if (Max > 0 && false)
         {
             for (int j = 0; j < HistX_Size; ++j)
                 Merge[i][j] /= Max;

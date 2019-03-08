@@ -52,7 +52,7 @@ void Processor::PROCESS(std::vector<std::vector<double>> &HistE)
             //Merge HistE and HistX regarding cos(psi)
             MERGER.MERGE(HistE,HistX,Merge,Maxima);
 
-            Name = "Histograms/TmpEGamma2_" + std::to_string(EnergyBin) + "/d0_";
+            Name = "Histograms/TmpEGamma_" + std::to_string(EnergyBin) + "/d0_";
             Name += std::to_string(d0) + "/d12_" + std::to_string(d12);
 
             //write merged Histogram into file E_i/d0_j/d12_k
