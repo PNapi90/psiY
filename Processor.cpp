@@ -52,13 +52,13 @@ void Processor::PROCESS(std::vector<std::vector<double>> &HistE)
             //Merge HistE and HistX regarding cos(psi)
             MERGER.MERGE(HistE,HistX,Merge,Maxima);
 
-            Name = "Histograms/TmpEGamma_" + std::to_string(EnergyBin) + "/d0_";
+            Name = "Histograms/ExpEGamma_" + std::to_string(EnergyBin) + "/d0_";
             Name += std::to_string(d0) + "/d12_" + std::to_string(d12);
 
             //write merged Histogram into file E_i/d0_j/d12_k
             FILES->Write(Merge,Name);
         }
-        if(thrNum == 0)
+        if(!thrNum)
         {   
             std::cout << "Thread # 00 : Distance d0 = " << d0 << " mm done" << std::endl;
         }

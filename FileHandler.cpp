@@ -67,8 +67,9 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
 {
     std::lock_guard<std::mutex> LOCK(MUTEX);
 
-    std::string EName = "ComptonHists/ComptonHist_661_Merge"; //"ComptonHists/ComptonHist_" + std::to_string(Eg);
-
+    //std::string EName = "ComptonHists/ComptonHist_661_Merge"; //"ComptonHists/ComptonHist_" + std::to_string(Eg);
+    std::string EName = "ComptonHists/ComptonHist_661_exp";
+    
     std::ifstream DATA;
     if (binary)
         DATA.open(EName, std::ios::in | std::ios::binary);
@@ -106,7 +107,8 @@ void FileHandler::Load_E(std::vector<std::vector<double>> &DataE,int Eg)
 
 //---------------------------------------------------------
 
-void FileHandler::Write(std::vector<std::vector<double>> &DataEX,std::string FileName)
+void FileHandler::Write(std::vector<std::vector<double>> &DataEX,
+                        std::string FileName)
 {
     std::lock_guard<std::mutex> LOCK(MUTEX_W);
 
